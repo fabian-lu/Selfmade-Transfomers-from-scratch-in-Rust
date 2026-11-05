@@ -51,6 +51,23 @@ fn dot_product(first_vec: &[f64], second_vec: &[f64]) -> f64 {
         .sum()
 }
 
+fn closures_test() {
+    fn apply(a: f32, b: f32, operation: impl Fn(f32, f32) -> f32) -> f32 {
+        operation(a, b)
+    }
+
+    let test_one = apply(2.0, 3.0, |x, y| x + y); // gives 5.0
+    println!("{}", test_one);
+    let test_two = apply(2.0, 3.0, |x, y| x * y); // gives 6.0
+    println!("{}", test_two);
+
+    ////////////////////////////////////////////
+
+    let multiplier = 2;
+    let multiply = |x| x * multiplier;
+    println!("{}", multiply(5)); // 10
+}
+
 fn main() {
     //iter()
     iter_test();
@@ -64,10 +81,13 @@ fn main() {
     //sum
     sum_test();
 
+    //closures
+    closures_test();
+
     // Bringing it all together, dot product
-    let a: Vec<f64> = vec![1.0, 2.0];
+    /*let a: Vec<f64> = vec![1.0, 2.0];
     let b: Vec<f64> = vec![3.0, 4.0];
 
     println!("{}", dot_product(&a, &b));
-    print!("{:?}", a);
+    print!("{:?}", a);*/
 }

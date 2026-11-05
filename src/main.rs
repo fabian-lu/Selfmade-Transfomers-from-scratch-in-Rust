@@ -71,5 +71,26 @@ fn main() {
 
     first_matrix_for_addition
         .add_matrix(&second_matrix_for_addition)
-        .print()
+        .print();
+    let unchunked = vec![1.0, 2.0, 3.0, 4.0, 500000.0, 6.0];
+    let mut chunked = format!(
+        "[{}]",
+        unchunked
+            .chunks(3)
+            .map(|row| {
+                format!(
+                    "[{}]",
+                    row.iter()
+                        .map(|col_value| { format!("{:.2}", col_value) })
+                        .collect::<Vec<String>>()
+                        .join(" ")
+                )
+            })
+            .collect::<Vec<String>>()
+            .join("\n ")
+    );
+
+    println!("{}", chunked);
+
+    // {format!("{:6.2}", row)}
 }
