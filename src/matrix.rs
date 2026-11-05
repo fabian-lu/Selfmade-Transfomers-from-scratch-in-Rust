@@ -143,15 +143,25 @@ impl Matrix {
             self.rows, self.cols, second_matrix.rows, second_matrix.cols
         );
 
-        let mut new_data: Vec<f32> = Vec::with_capacity(self.rows * second_matrix.cols);
-        let secon_matrix_transposed: Matrix = second_matrix.transpose();
+        let mut new_data: Vec<f32> = vec![0.0; self.rows * second_matrix.cols];
 
         for row_index in 0..self.rows {
             let row = self.row(row_index);
-            for col_index in 0..second_matrix.cols {
-                let col = secon_matrix_transposed.row(col_index);
-                let sum = dot_product(row, col);
-                new_data.push(sum);
+
+            // the part of new_data that holds this row of the result, writable
+            let start = row_index * second_matrix.cols;
+            let end = start + second_matrix.cols;
+            let result_row = &mut new_data[start..end];
+
+            for shared_index in 0..self.cols {
+                let factor = row[shared_index];
+                let second_row = second_matrix.row(shared_index);
+
+                // result_row += factor * second_row, value by value; the steps don't
+                // depend on each other, so the processor can do several at once
+                for (result_value, second_value) in result_row.iter_mut().zip(second_row) {
+                    *result_value += factor * second_value;
+                }
             }
         }
 
