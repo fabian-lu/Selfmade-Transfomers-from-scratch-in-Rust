@@ -1,3 +1,5 @@
+use crate::random_number_generator::RandomNumberGenerator;
+
 #[derive(Debug, Clone, PartialEq)]
 pub struct Matrix {
     rows: usize,
@@ -15,6 +17,14 @@ impl Matrix {
             rows,
             cols,
             data: vec![0.0; rows * cols],
+        }
+    }
+
+    pub fn randoms(rng: &mut RandomNumberGenerator, rows: usize, cols: usize, spread: f32) -> Self {
+        Self {
+            rows,
+            cols,
+            data: rng.get_random_normal_floats(rows * cols, spread),
         }
     }
 

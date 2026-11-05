@@ -1,4 +1,6 @@
 mod matrix;
+mod random_number_generator;
+
 use matrix::Matrix;
 
 fn main() {
