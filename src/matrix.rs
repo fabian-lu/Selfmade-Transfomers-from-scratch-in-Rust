@@ -1,20 +1,28 @@
-
 pub struct Matrix {
     rows: usize,
     cols: usize,
-    data: Vec<f32>
+    data: Vec<f32>,
 }
 
 impl Matrix {
     pub fn zeros(rows: usize, cols: usize) -> Matrix {
-        Matrix{rows, cols, data: vec![0.0; rows*cols]}
+        Matrix {
+            rows,
+            cols,
+            data: vec![0.0; rows * cols],
+        }
     }
 
     pub fn from_vec(rows: usize, cols: usize, vector: Vec<f32>) -> Matrix {
-        assert_eq!(vector.len(), rows * cols, "Length of the Vector does not fit into the matrix.");
-        Matrix{
-            rows, cols,
-            data: vector
+        assert_eq!(
+            vector.len(),
+            rows * cols,
+            "Length of the Vector does not fit into the matrix."
+        );
+        Matrix {
+            rows,
+            cols,
+            data: vector,
         }
     }
 
@@ -30,10 +38,11 @@ impl Matrix {
                 } else {
                     print!("{}, ", self.data[index]);
                 }
-
             }
             print!("]");
-            if row_index != self.rows - 1 {println!()}
+            if row_index != self.rows - 1 {
+                println!()
+            }
         }
         print!("]");
         println!();
@@ -83,13 +92,18 @@ impl Matrix {
     }
 
     fn dot_product(first_vec: &[f32], second_vec: &[f32]) -> f32 {
-        first_vec.iter().zip(second_vec.iter())
-            .map(|(first_element, second_element)| {first_element * second_element})
+        first_vec
+            .iter()
+            .zip(second_vec.iter())
+            .map(|(first_element, second_element)| first_element * second_element)
             .sum()
     }
 
     pub fn matrix_mult(&self, second_matrix: &Self) -> Self {
-        assert!(self.cols == second_matrix.rows, "Indices not matching for multiplication");
+        assert!(
+            self.cols == second_matrix.rows,
+            "Indices not matching for multiplication"
+        );
 
         let mut new_matrix: Matrix = Self::zeros(self.rows, second_matrix.cols);
         for row_index in 0..new_matrix.rows {
@@ -103,21 +117,23 @@ impl Matrix {
         }
 
         new_matrix
-
     }
 
     pub fn add_matrix(&self, second_matrix: &Self) -> Self {
         assert_eq!(self.cols, second_matrix.cols, "Columns do not match!");
         assert_eq!(self.rows, second_matrix.rows, "Rows do not match!");
 
-        let new_data: Vec<f32> = self.data.iter().zip(second_matrix.data.iter())
+        let new_data: Vec<f32> = self
+            .data
+            .iter()
+            .zip(second_matrix.data.iter())
             .map(|(first_item, second_item)| first_item + second_item)
             .collect();
 
         Matrix {
             rows: self.rows,
             cols: self.cols,
-            data: new_data
+            data: new_data,
         }
     }
 
@@ -125,30 +141,29 @@ impl Matrix {
         assert_eq!(self.cols, second_matrix.cols, "Columns do not match!");
         assert_eq!(self.rows, second_matrix.rows, "Rows do not match!");
 
-        let new_data: Vec<f32> = self.data.iter().zip(second_matrix.data.iter())
+        let new_data: Vec<f32> = self
+            .data
+            .iter()
+            .zip(second_matrix.data.iter())
             .map(|(first_item, second_item)| first_item * second_item)
             .collect();
 
         Matrix {
             rows: self.rows,
             cols: self.cols,
-            data: new_data
+            data: new_data,
         }
     }
 
     pub fn scale(&self, scale_factor: f32) -> Self {
-        let new_data = self.data.iter()
-            .map(|item| scale_factor * item)
-            .collect();
+        let new_data = self.data.iter().map(|item| scale_factor * item).collect();
 
         Matrix {
             rows: self.rows,
             cols: self.cols,
-            data: new_data
+            data: new_data,
         }
     }
-
-
 }
 
 /*[

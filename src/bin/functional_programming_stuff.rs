@@ -10,8 +10,7 @@ fn iter_test() {
     println!("{:?}", it.next());
     println!("{:?}", it.next());
 
-
-    let test_vec = vec![1,2,3,4];
+    let test_vec = vec![1, 2, 3, 4];
     for i in test_vec.iter() {
         println!("{}", i);
     }
@@ -31,10 +30,7 @@ fn map_test() {
     //transform each element into something else
     let numbers = vec![1, 2, 3, 4];
     println!("Before: {:?}", numbers);
-    let doubled: Vec<i32> = numbers
-        .iter()
-        .map(|x| {x * 2})
-        .collect();
+    let doubled: Vec<i32> = numbers.iter().map(|x| x * 2).collect();
 
     println!("After: {:?}", doubled);
 }
@@ -48,13 +44,14 @@ fn sum_test() {
 }
 
 fn dot_product(first_vec: &[f64], second_vec: &[f64]) -> f64 {
-    first_vec.iter().zip(second_vec.iter())
-        .map(|(first_element, second_element)| {first_element * second_element})
+    first_vec
+        .iter()
+        .zip(second_vec.iter())
+        .map(|(first_element, second_element)| first_element * second_element)
         .sum()
 }
 
 fn main() {
-
     //iter()
     iter_test();
 
