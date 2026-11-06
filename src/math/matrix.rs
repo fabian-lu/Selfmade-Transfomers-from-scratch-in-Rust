@@ -1,4 +1,4 @@
-use crate::random_number_generator::RandomNumberGenerator;
+use crate::math::random_number_generator::RandomNumberGenerator;
 
 #[derive(Debug, Clone, PartialEq)]
 pub struct Matrix {
@@ -8,6 +8,7 @@ pub struct Matrix {
 }
 
 impl Matrix {
+    #[inline]
     pub fn shape(&self) -> (usize, usize) {
         (self.rows, self.cols)
     }
@@ -71,10 +72,12 @@ impl Matrix {
         println!("[{}]", rows.join("\n "));
     }
 
+    #[inline]
     pub fn get(&self, row: usize, col: usize) -> f32 {
         self.data[self.index(row, col)]
     }
 
+    #[inline]
     fn index(&self, row: usize, col: usize) -> usize {
         assert!(
             row < self.rows,
@@ -122,6 +125,7 @@ impl Matrix {
             .collect()
     }
 
+    #[inline]
     pub fn set(&mut self, row: usize, col: usize, value: f32) {
         let index_to_set = self.index(row, col);
         self.data[index_to_set] = value;

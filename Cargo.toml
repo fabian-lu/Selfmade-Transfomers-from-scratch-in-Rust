@@ -5,3 +5,12 @@ edition = "2024"
 default-run = "selfmade_transformers"
 
 [dependencies]
+
+
+[[example]]
+name = "functional_programming"
+path = "examples/playground_to_understand_rust/functional_programming_stuff.rs"
+
+[[example]]
+name = "matrix_mult_speed"
+path = "examples/experiments_project_related/matrix_mult_speed.rs"
