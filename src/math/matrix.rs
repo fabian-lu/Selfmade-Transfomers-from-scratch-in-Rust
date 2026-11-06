@@ -42,6 +42,12 @@ impl Matrix {
         Self { rows, cols, data }
     }
 
+    pub fn from_rows<const COLS: usize>(rows: &[[f32; COLS]]) -> Self {
+        let rows_as_vec: Vec<f32> = rows.iter().flatten().copied().collect();
+
+        Self::from_vec(rows.len(), COLS, rows_as_vec)
+    }
+
     pub fn print(&self) {
         // chunks() panics when the chunk size is 0, so an empty matrix gets its own case
         if self.data.is_empty() {

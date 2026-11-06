@@ -11,8 +11,10 @@ fn time_matrix_mult() {
     // in dev profile: took 1.335478213s ; in release profile: took 118.402022ms ==> about 11 times faster
     let start: Instant = Instant::now();
 
-    let first_random_matrix: Matrix = Matrix::randoms(&mut RandomNumberGenerator::new(1),512,512, 1.0);
-    let second_random_matrix: Matrix = Matrix::randoms(&mut RandomNumberGenerator::new(100),512,512, 1.0);
+    let first_random_matrix: Matrix =
+        Matrix::randoms(&mut RandomNumberGenerator::new(1), 512, 512, 1.0);
+    let second_random_matrix: Matrix =
+        Matrix::randoms(&mut RandomNumberGenerator::new(100), 512, 512, 1.0);
 
     let result = first_random_matrix.matrix_mult(&second_random_matrix);
 
@@ -54,7 +56,11 @@ fn matrix_mult_swapped_loops(first_matrix: &Matrix, second_matrix: &Matrix) -> M
             let first_value = first_matrix.get(row, shared_index);
             for col in 0..cols {
                 let current = result.get(row, col);
-                result.set(row, col, current + first_value * second_matrix.get(shared_index, col));
+                result.set(
+                    row,
+                    col,
+                    current + first_value * second_matrix.get(shared_index, col),
+                );
             }
         }
     }

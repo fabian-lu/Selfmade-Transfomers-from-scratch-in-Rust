@@ -2,7 +2,7 @@ use crate::math::matrix::Matrix;
 
 pub struct LinearLayer {
     weights: Matrix,
-    bias: Matrix
+    bias: Matrix,
 }
 
 impl LinearLayer {
@@ -22,10 +22,12 @@ impl LinearLayer {
             bias.shape()
         );
 
-        Self {weights, bias}
+        Self { weights, bias }
     }
 
     pub fn forward(&self, input_vector: &Matrix) -> Matrix {
-        self.weights.matrix_mult(input_vector).add_matrix(&self.bias)
+        self.weights
+            .matrix_mult(input_vector)
+            .add_matrix(&self.bias)
     }
 }
