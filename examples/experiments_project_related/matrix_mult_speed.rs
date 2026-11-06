@@ -1,3 +1,5 @@
+mod logic_gates;
+
 // My own files
 use selfmade_transformers::math::matrix::Matrix;
 use selfmade_transformers::math::random_number_generator::RandomNumberGenerator;

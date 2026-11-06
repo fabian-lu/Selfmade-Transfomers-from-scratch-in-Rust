@@ -214,7 +214,7 @@ impl Matrix {
         )
     }
 
-    fn map_with_helper(&self, operation: impl Fn(f32) -> f32) -> Self {
+    pub fn map_with_helper(&self, operation: impl Fn(f32) -> f32) -> Self {
         let new_data: Vec<f32> = self
             .data
             .iter()
